@@ -8,14 +8,21 @@ const server = Bun.serve({
 		}
 		// parse formdata at /action
 		if (url.pathname === '/upload') {
+			try {
 			const formdata = await req.formData();
-			const document = formdata.get('document');
+			const metadata = formdata.get('document');
 			console.log('document metadata', document);
 			const attachedDocument = formdata.get('attachment');
 			console.log('document file', attachedDocument);
+			const response = {
+				metadata,
+				attachment: `${attachedDocument}`,
+			};
+			return new Response(JSON.stringify(response));
+			} catch (e) {
+				return new Response(JSON.stringify({error: `${e}`}));
+			}
 
-			await Bun.write('profilePicture.png', profilePicture);
-			return new Response('Success');
 		}
 
 		return new Response('Not Found', { status: 404 });
