@@ -13,13 +13,10 @@ const server = Bun.serve({
 				const formdata = await req.formData();
 				const metadata = formdata.get('document');
 				console.log('document metadata', metadata);
-				const attachedDocument = formdata.get('attachment');
-				console.log('document file', attachedDocument);
-				const response = {
-					metadata,
-					attachment: `${attachedDocument}`,
-				};
-				return Response.json(JSON.stringify(response));
+				const file = formdata.get('attachment');
+				const blob = new Blob([file], { type: file.type })
+
+				return new Response(blob, {headers: {"content-type": file.type}});
 			} catch (e) {
 				console.log(e);
 				return Response.json(JSON.stringify({ error: `${e}` }));
