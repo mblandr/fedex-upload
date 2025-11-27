@@ -2,6 +2,7 @@
 	"name": "node",
 	"type": "module",
 	"scripts": {
-		"dev": "bun --bun --watch index.js"
+		"dev": "bun --bun --watch index.js",
+		"prod": "clear"
 	}
 }
