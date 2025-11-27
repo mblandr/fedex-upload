@@ -2,6 +2,7 @@ const server = Bun.serve({
 	port: 4000,
 	async fetch(req) {
 		const url = new URL(req.url);
+		console.log(url.pathname)
 
 		if (url.pathname === '/') {
 			return new Response('bun is worked fine');
@@ -18,9 +19,9 @@ const server = Bun.serve({
 				metadata,
 				attachment: `${attachedDocument}`,
 			};
-			return new Response(JSON.stringify(response));
+			return Response.json(JSON.stringify(response));
 			} catch (e) {
-				return new Response(JSON.stringify({error: `${e}`}));
+				return Response.json(JSON.stringify({error: `${e}`}));
 			}
 
 		}
