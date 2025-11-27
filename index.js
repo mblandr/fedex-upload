@@ -12,7 +12,7 @@ const server = Bun.serve({
 			try {
 				const formdata = await req.formData();
 				const metadata = formdata.get('document');
-				console.log('document metadata', document);
+				console.log('document metadata', metadata);
 				const attachedDocument = formdata.get('attachment');
 				console.log('document file', attachedDocument);
 				const response = {
