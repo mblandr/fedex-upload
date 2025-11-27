@@ -1,0 +1,7 @@
+{
+	"name": "node",
+	"type": "module",
+	"scripts": {
+		"dev": "bun --bun --watch index.js"
+	}
+}
